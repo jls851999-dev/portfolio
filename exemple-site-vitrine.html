@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Petit Basilic — Restaurant italien</title>
+<meta name="description" content="Exemple de site vitrine pour un petit restaurant — réalisé par Numérique Pro.">
+
+<style>
+  /* ============================================
+     DESIGN : bistro éditorial, chaleureux, papier
+     Palette : crème, terracotta, olive, encre
+     Typo : serif système pour les titres, sans-serif pour le corps
+     ============================================ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --cream: #f6f0e4;
+    --paper: #fbf7ee;
+    --ink: #2b2620;
+    --ink-soft: #5c5346;
+    --terracotta: #b5502e;
+    --olive: #5b6b4a;
+    --gold: #c9973f;
+  }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--cream);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+    line-height: 1.65;
+  }
+
+  .sans{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+  .wrap{ max-width: 920px; margin: 0 auto; padding: 0 24px; }
+
+  /* Bandeau retour vers le site principal */
+  .demo-bar{
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .demo-bar .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    font-size: 0.82rem;
+  }
+  .demo-bar a{
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(246,240,228,0.4);
+  }
+  .demo-bar a:hover{ border-color: var(--cream); }
+  .demo-bar span{ opacity: 0.65; }
+
+  /* ============================================
+     NAV
+     ============================================ */
+  nav.site-nav{
+    padding: 26px 0;
+    border-bottom: 1px solid rgba(43,38,32,0.12);
+  }
+  nav.site-nav .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand{
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+  }
+  .brand em{ color: var(--terracotta); font-style: italic; }
+  .menu-links{
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    font-family: inherit;
+    font-size: 0.92rem;
+  }
+  .menu-links a{ color: var(--ink); text-decoration: none; }
+  .menu-links a:hover{ color: var(--terracotta); }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero{
+    padding: 90px 0 70px;
+    text-align: center;
+    position: relative;
+  }
+  .hero .kicker{
+    font-family: inherit;
+    font-style: italic;
+    color: var(--terracotta);
+    font-size: 1.05rem;
+    margin-bottom: 18px;
+    display: block;
+  }
+  .hero h1{
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 400;
+    line-height: 1.12;
+    margin-bottom: 24px;
+  }
+  .hero p{
+    max-width: 500px;
+    margin: 0 auto 34px;
+    color: var(--ink-soft);
+    font-size: 1.08rem;
+  }
+
+  /* Séparateur dessiné, motif organique bistro */
+  .divider{
+    width: 100%;
+    height: 22px;
+    margin: 0 auto;
+    display: block;
+  }
+  .divider path{ stroke: var(--gold); stroke-width: 1.6; fill: none; }
+
+  .hero-cta{
+    display: inline-block;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 14px 34px;
+    background: var(--terracotta);
+    color: var(--paper);
+    text-decoration: none;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+  .hero-cta:hover{ background: #983f22; transform: translateY(-2px); }
+
+  /* ============================================
+     À PROPOS
+     ============================================ */
+  .about{
+    padding: 70px 0;
+    background: var(--paper);
+    border-top: 1px solid rgba(43,38,32,0.1);
+    border-bottom: 1px solid rgba(43,38,32,0.1);
+  }
+  .about .wrap{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .about-visual{
+    aspect-ratio: 4/5;
+    border-radius: 4px;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(197,148,63,0.35), transparent 60%),
+      linear-gradient(150deg, var(--olive), #3d4732);
+    position: relative;
+    overflow: hidden;
+  }
+  .about-visual::after{
+    content: "🌿";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    opacity: 0.5;
+  }
+  .about h2{
+    font-size: 1.9rem;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .about p{ color: var(--ink-soft); margin-bottom: 14px; }
+  .about-sign{
+    font-style: italic;
+    color: var(--terracotta);
+    margin-top: 18px;
+  }
+
+  /* ============================================
+     MENU — mise en page typographique classique
+     ============================================ */
+  .menu-section{ padding: 80px 0; }
+  .menu-section .section-title{
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .menu-section .section-title span{
+    font-family: inherit;
+    font-style: italic;
+    color: var(--terracotta);
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+  .menu-section .section-title h2{
+    font-size: 2.1rem;
+    font-weight: 400;
+  }
+
+  .menu-columns{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .menu-cat h3{
+    color: var(--olive);
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(43,38,32,0.15);
+  }
+  .menu-item{
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .menu-item .name{ white-space: nowrap; }
+  .menu-item .name small{
+    display: block;
+    font-family: inherit;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    margin-top: 2px;
+  }
+  .menu-item .leader{
+    flex: 1;
+    border-bottom: 1px dotted rgba(43,38,32,0.35);
+    transform: translateY(-4px);
+  }
+  .menu-item .price{
+    color: var(--terracotta);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* ============================================
+     RÉSERVATION
+     ============================================ */
+  .reserve{
+    background: var(--ink);
+    color: var(--cream);
+    padding: 70px 0;
+    text-align: center;
+  }
+  .reserve h2{ font-size: 2rem; font-weight: 400; margin-bottom: 14px; }
+  .reserve p{ color: rgba(246,240,228,0.7); margin-bottom: 30px; }
+  .reserve-info{
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: inherit;
+    font-size: 0.95rem;
+  }
+  .reserve-info div span{
+    display: block;
+    font-family: inherit;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 0.82rem;
+    margin-bottom: 4px;
+  }
+
+  footer.site-footer{
+    padding: 26px 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    background: var(--paper);
+  }
+
+  @media (max-width: 760px){
+    .menu-links{ display: none; }
+    .about .wrap{ grid-template-columns: 1fr; }
+    .menu-columns{ grid-template-columns: 1fr; gap: 36px; }
+    .reserve-info{ flex-direction: column; gap: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar sans">
+  <div class="wrap">
+    <span>Exemple de réalisation — Numérique Pro</span>
+    <a href="index.html">← Retour au site principal</a>
+  </div>
+</div>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <div class="brand">Le Petit <em>Basilic</em></div>
+    <ul class="menu-links">
+      <li><a href="#apropos">L'histoire</a></li>
+      <li><a href="#carte">La carte</a></li>
+      <li><a href="#reservation">Réserver</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Cuisine italienne familiale, à deux pas de chez vous</span>
+    <h1>Une table simple,<br>des produits qui ont du goût.</h1>
+    <p>Pâtes fraîches, produits de saison et recettes transmises depuis trois générations. Ouvert du mardi au dimanche, au cœur du quartier.</p>
+    <svg class="divider" viewBox="0 0 200 20"><path d="M0 10 Q 20 0, 40 10 T 80 10 T 120 10 T 160 10 T 200 10"/></svg>
+    <br>
+    <a href="#reservation" class="hero-cta">Réserver une table</a>
+  </div>
+</header>
+
+<section class="about" id="apropos">
+  <div class="wrap">
+    <div class="about-visual"></div>
+    <div>
+      <h2>L'histoire de la maison</h2>
+      <p>Le Petit Basilic est né de l'envie de partager une cuisine honnête : celle des dimanches en famille, des sauces qui mijotent des heures et du pain qu'on se resert sans compter.</p>
+      <p>Chaque jour, nous choisissons nos légumes chez les producteurs du coin et pétrissons nos pâtes à la main, comme on l'a toujours fait.</p>
+      <p class="about-sign">— Giulia &amp; Marco, à votre table depuis 2014</p>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section" id="carte">
+  <div class="wrap">
+    <div class="section-title">
+      <span>Ce soir sur l'ardoise</span>
+      <h2>La carte</h2>
+    </div>
+
+    <div class="menu-columns">
+      <div class="menu-cat">
+        <h3>Pour commencer</h3>
+        <div class="menu-item">
+          <span class="name">Burrata des Pouilles<small>tomates anciennes, basilic frais</small></span>
+          <span class="leader"></span>
+          <span class="price">12 €</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Carpaccio de bœuf<small>copeaux de parmesan, roquette</small></span>
+          <span class="leader"></span>
+          <span class="price">14 €</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Arancini maison<small>trio, sauce tomate épicée</small></span>
+          <span class="leader"></span>
+          <span class="price">9 €</span>
+        </div>
+      </div>
+
+      <div class="menu-cat">
+        <h3>Pâtes &amp; plats</h3>
+        <div class="menu-item">
+          <span class="name">Tagliatelles au ragù<small>mijoté 6 heures</small></span>
+          <span class="leader"></span>
+          <span class="price">17 €</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Risotto aux champignons<small>parmesan 24 mois</small></span>
+          <span class="leader"></span>
+          <span class="price">18 €</span>
+        </div>
+        <div class="menu-item">
+          <span class="name">Escalope milanaise<small>salade de saison</small></span>
+          <span class="leader"></span>
+          <span class="price">19 €</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve" id="reservation">
+  <div class="wrap">
+    <h2>Réservez votre table</h2>
+    <p>Nous vous conseillons de réserver, particulièrement le week-end.</p>
+    <div class="reserve-info">
+      <div><span>Téléphone</span>01 23 45 67 89</div>
+      <div><span>Adresse</span>12 rue des Oliviers, votre ville</div>
+      <div><span>Horaires</span>Mar–Dim, 12h–14h30 / 19h–22h30</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer sans">
+  <div class="wrap">Le Petit Basilic — restaurant fictif conçu à titre d'exemple.</div>
+</footer>
+
+</body>
+</html>

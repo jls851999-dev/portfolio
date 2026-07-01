@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche Google Business — Boulangerie du Marché</title>
+<meta name="description" content="Exemple de fiche Google Business optimisée — réalisé par Numérique Pro.">
+
+<style>
+  /* ============================================
+     DESIGN : sobre, propre, "Material" — reprend
+     les codes visuels d'un vrai panneau Google
+     Business Profile / Maps.
+     Palette : blanc, gris Google, bleu/rouge/jaune/vert
+     Typo : sans-serif système façon Google Sans
+     ============================================ */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --g-blue: #1a73e8;
+    --g-red: #ea4335;
+    --g-yellow: #fbbc04;
+    --g-green: #34a853;
+    --ink: #202124;
+    --ink-soft: #5f6368;
+    --line: #e8eaed;
+    --bg: #f1f3f4;
+  }
+
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+
+  .wrap{ max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  /* Bandeau retour */
+  .demo-bar{
+    background: var(--ink);
+    color: #fff;
+  }
+  .demo-bar .wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    font-size: 0.8rem;
+  }
+  .demo-bar a{ color: #8ab4f8; text-decoration: none; }
+  .demo-bar a:hover{ text-decoration: underline; }
+  .demo-bar span{ opacity: 0.75; }
+
+  .page{ padding: 28px 0 60px; }
+
+  /* Barre de recherche simulée */
+  .search-bar{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 12px 18px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+  .search-bar svg{ flex-shrink: 0; color: var(--ink-soft); }
+
+  /* ============================================
+     PANNEAU FICHE (signature element)
+     ============================================ */
+  .profile-card{
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .photo-strip{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2px;
+    height: 200px;
+  }
+  .photo-strip div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+  }
+  .photo-strip div:nth-child(1){ background: linear-gradient(150deg, #e8b25a, #a8631f); }
+  .photo-strip div:nth-child(2){ background: linear-gradient(150deg, #d99b52, #8a5a26); }
+  .photo-strip div:nth-child(3){ background: linear-gradient(150deg, #c98a45, #6f4a22); font-size: 1rem; color: rgba(255,255,255,0.9); font-weight: 700; }
+
+  .profile-body{ padding: 20px 22px 8px; }
+
+  .profile-body h1{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .category{
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-bottom: 10px;
+  }
+
+  .rating-row{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    font-size: 0.92rem;
+  }
+  .rating-score{ color: var(--ink); font-weight: 600; }
+  .stars{ color: var(--g-yellow); letter-spacing: 1px; }
+  .rating-count{ color: var(--g-blue); }
+
+  .badge-row{ margin-bottom: 16px; }
+  .badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--g-green);
+    background: rgba(52,168,83,0.1);
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+
+  .action-row{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 14px 10px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .action{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--g-blue);
+    font-size: 0.72rem;
+    font-family: inherit;
+    padding: 6px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .action:hover{ background: rgba(26,115,232,0.08); }
+  .action .icon{
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(26,115,232,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+
+  .info-list{ padding: 6px 22px 22px; }
+  .info-line{
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 11px 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .info-line:last-child{ border-bottom: none; }
+  .info-line .icon-dot{
+    width: 20px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .info-line .open-now{ color: var(--g-green); font-weight: 600; }
+
+  /* ============================================
+     AVIS
+     ============================================ */
+  .reviews{
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .reviews h2{ font-size: 1.05rem; font-weight: 500; margin-bottom: 16px; }
+  .review{
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .review:last-child{ border-bottom: none; }
+  .avatar{
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .review:nth-child(1) .avatar{ background: var(--g-blue); }
+  .review:nth-child(2) .avatar{ background: var(--g-red); }
+  .review-body .name{ font-weight: 500; font-size: 0.88rem; }
+  .review-body .stars{ font-size: 0.78rem; margin: 3px 0 6px; display: block; }
+  .review-body p{ font-size: 0.86rem; color: var(--ink-soft); }
+
+  /* Note explicative de l'exemple */
+  .callout{
+    margin-top: 22px;
+    background: #fff;
+    border-left: 4px solid var(--g-blue);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+  }
+  .callout strong{ color: var(--ink); }
+
+  @media (max-width: 560px){
+    .action-row{ grid-template-columns: repeat(4, 1fr); }
+    .action{ font-size: 0.65rem; }
+    .photo-strip{ height: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar">
+  <div class="wrap">
+    <span>Exemple de réalisation — Numérique Pro</span>
+    <a href="index.html">← Retour au site principal</a>
+  </div>
+</div>
+
+<div class="page">
+  <div class="wrap">
+
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      boulangerie du marché
+    </div>
+
+    <div class="profile-card">
+      <div class="photo-strip">
+        <div>🥐</div>
+        <div>🍞</div>
+        <div>+18 photos</div>
+      </div>
+
+      <div class="profile-body">
+        <h1>Boulangerie du Marché</h1>
+        <p class="category">Boulangerie · Pâtisserie · Sandwicherie</p>
+
+        <div class="rating-row">
+          <span class="rating-score">4,8</span>
+          <span class="stars">★★★★★</span>
+          <span class="rating-count">(214 avis)</span>
+        </div>
+
+        <div class="badge-row">
+          <span class="badge">● Identité vérifiée</span>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button class="action"><span class="icon">↗</span>Itinéraire</button>
+        <button class="action"><span class="icon">☎</span>Appeler</button>
+        <button class="action"><span class="icon">🌐</span>Site web</button>
+        <button class="action"><span class="icon">🔖</span>Enregistrer</button>
+      </div>
+
+      <div class="info-list">
+        <div class="info-line">
+          <span class="icon-dot">📍</span>
+          <span>8 place du Marché, 75011 Paris</span>
+        </div>
+        <div class="info-line">
+          <span class="icon-dot">🕒</span>
+          <span><span class="open-now">Ouvert</span> · Ferme à 19h30</span>
+        </div>
+        <div class="info-line">
+          <span class="icon-dot">☎</span>
+          <span>01 23 45 67 89</span>
+        </div>
+        <div class="info-line">
+          <span class="icon-dot">🌐</span>
+          <span>boulangeriedumarche.fr</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews">
+      <h2>Avis à la une</h2>
+      <div class="review">
+        <div class="avatar">L</div>
+        <div class="review-body">
+          <div class="name">Léa M.</div>
+          <span class="stars">★★★★★</span>
+          <p>Le pain au levain est excellent, et l'équipe toujours souriante même le samedi matin.</p>
+        </div>
+      </div>
+      <div class="review">
+        <div class="avatar">T</div>
+        <div class="review-body">
+          <div class="name">Thomas R.</div>
+          <span class="stars">★★★★★</span>
+          <p>Ma boulangerie de quartier préférée, les croissants n'ont rien à envier à ceux d'un grand chef.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Ce que couvre l'optimisation :</strong> catégorie et mots-clés pertinents, photos qui donnent envie, horaires à jour, réponses aux avis et suivi des statistiques de visibilité — pour faire remonter votre fiche dans les recherches locales.
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
